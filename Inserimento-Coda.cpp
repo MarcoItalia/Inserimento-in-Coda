@@ -63,11 +63,10 @@ public:
     friend ostream& operator<<(ostream& out, const Coda<T>& cd){
         Nodo<T>* iter = cd.testa;
         for( ; iter != cd.coda; iter=iter->succ)
-            out<< iter->valore <<" --> ";
+            out<< iter->valore <<" ";
         if(iter)
-            out<< iter->valore << " --> ";
+            out<< iter->valore << " ";
 
-        out<<"NULL";
         return out;
     }
 };
@@ -85,26 +84,46 @@ Pila::~Pila(){
 
 int main(){
 
-    Coda<int> codai;
+    string tipo, tmp;
+    int n;
 
-    codai.enqueue(10);
-    codai.enqueue(13);
-    codai.enqueue(15);
+    for(int task=0; task<100; task++){
+        in >> tipo;
+        in >> n;
 
-    cout << "0: " << codai << endl;
-
-    int tmp=codai.dequeue();
-
-    cout << "1: " << codai << endl;
-    tmp=codai.dequeue();
-    cout << "2: " << codai << endl;
-    tmp=codai.dequeue();
-    cout << "3: "<< codai << endl;
-    tmp=codai.dequeue();
-    cout << codai << endl;
-
-    codai.enqueue(5);
-    cout << "Fine: " << endl << codai;
+        if(tipo == "double"){
+            Coda<double> codad;
+            for(int i=0; i<n; i++){
+                in >> tmp;
+                codad.enqueue(stod(tmp));
+            }
+            out << codad << endl;
+        }
+        else if(tipo == "int"){
+            Coda<int> codai;
+            for(int i=0; i<n; i++){
+                in >> tmp;
+                codai.enqueue(stoi(tmp));
+            }
+            out << codai << endl;
+        }
+        else if(tipo == "char"){
+            Coda<char> codac;
+            for(int i=0; i<n; i++){
+                in >> tmp;
+                codac.enqueue(tmp[0]);
+            }
+            out << codac << endl;
+        }
+        else {
+            Coda<bool> codab;
+            for(int i=0; i<n; i++){
+                in >> tmp;
+                codab.enqueue(stoi(tmp));
+            }
+            out << codab << endl;
+        }
+    }
 
 return 0;
 }
